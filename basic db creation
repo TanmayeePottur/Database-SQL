@@ -1,0 +1,55 @@
+SQL> Create table STUDENT(
+  2  StudentID number(10),
+  3  FirstName varchar2(15),
+  4  LastName varchar2(15),
+  5  Gender varchar2(4),
+  6  Birthday varchar2(15),
+  7  constraint STUDENT primary key(StudentID));
+
+Table created.
+
+SQL> Create table STUDENT_PHONE(
+  2  PhoneNumber number(10),
+  3  Phonetype varchar2(15),
+  4  StudentID number(10),
+  5  constraint STUDENT_PHONE primary key(PhoneNumber, StudentID),
+  6  foreign key(StudentID) references STUDENT(StudentID));
+
+Table created.
+
+SQL> Create table DEPARTMENT(
+  2  DeptID number(10),
+  3  DepartmentName varchar2(15),
+  4  constraint DEPARTMENT primary key(DeptID));
+
+Table created.
+
+SQL> Create table COURSE(
+  2  CourseID number(10),
+  3  CreditHours number(15),
+  4  DeptID number(10),
+  5  constraint COURSE primary key(CourseID),
+  6  foreign key(DeptID) references DEPARTMENT(DeptID));
+
+Table created.
+
+SQL> Create table COURSE_TAKEN(
+  2  Grade varchar2(15),
+  3  StudentID number(10),
+  4  CourseID number(10),
+  5  Constraint COURSE_TAKEN primary key(CourseID, StudentID),
+  6  foreign key(StudentID) references STUDENT(StudentID),
+  7  foreign key(CourseID) references COURSE(CourseID));
+
+Table created.
+
+SQL> Create table PREREQ(
+  2  PREREQID number(15),
+  3  CourseID number(10),
+  4  constraint PREREQ primary key(PREREQID, CourseID),
+  5  foreign key(CourseID) references COURSE(CourseID));
+
+Table created.
+
+SQL> 
+SQL> spool off;
